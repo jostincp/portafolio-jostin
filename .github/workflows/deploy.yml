@@ -1,4 +1,4 @@
-name: Desplegar Landing Page a Oracle VPS
+name: Oracle VPS
 
 on:
   push:
