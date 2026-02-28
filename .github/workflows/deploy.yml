@@ -26,6 +26,6 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           source: "."
-          target: "/home/ubuntu/solutionshub/landing-gustavo"
+          target: "/home/ubuntu/solutionshub/portafolio-jostin"
           strip_components: 1
           overwrite: true
