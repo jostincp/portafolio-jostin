@@ -1,0 +1,32 @@
+
+> temp-next@0.1.0 build
+> next build
+
+Ôû▓ Next.js 16.1.6 (Turbopack)
+
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 2.1s
+  Running TypeScript ...
+Failed to compile.
+
+.next/types/validator.ts:67:31
+Type error: Type 'typeof import("C:/www/portafolio-jostin/src/app/[lang]/layout")' does not satisfy the constraint 'LayoutConfig<"/[lang]">'.
+  Types of property 'default' are incompatible.
+    Type '(props: { children: ReactNode; params: Promise<{ lang: Language; }>; }) => Promise<Element>' is not assignable to type 'ComponentType<LayoutProps<"/[lang]">> | ((props: LayoutProps<"/[lang]">) => void | ReactNode | Promise<ReactNode> | Promise<...>)'.
+      Type '(props: { children: ReactNode; params: Promise<{ lang: Language; }>; }) => Promise<Element>' is not assignable to type 'FunctionComponent<LayoutProps<"/[lang]">>'.
+        Types of parameters 'props' and 'props' are incompatible.
+          Type 'LayoutProps<"/[lang]">' is not assignable to type '{ children: ReactNode; params: Promise<{ lang: Language; }>; }'.
+            Types of property 'params' are incompatible.
+              Type 'Promise<{ lang: string; }>' is not assignable to type 'Promise<{ lang: Language; }>'.
+                Type '{ lang: string; }' is not assignable to type '{ lang: Language; }'.
+                  Types of property 'lang' are incompatible.
+                    Type 'string' is not assignable to type 'Language'.
+
+  65 |   type __IsExpected<Specific extends LayoutConfig<"/[lang]">> = Specific
+  66 |   const handler = {} as typeof import("../../src/app/[lang]/layout.js")
+> 67 |   type __Check = __IsExpected<typeof handler>
+     |                               ^
+  68 |   // @ts-ignore
+  69 |   type __Unused = __Check
+  70 | }
+Next.js build worker exited with code: 1 and signal: null

@@ -14,18 +14,21 @@ jobs:
       - name: Obtener el código más reciente
         uses: actions/checkout@v4
 
-      # Paso B (¡NUEVO!): Borramos las carpetas ocultas para que no viajen al servidor
-      - name: Limpiar archivos del sistema
-        run: rm -rf .git .github
+      # Paso B: Prepara y construye el proyecto Next.js
+      - name: Instalar dependencias
+        run: npm ci
 
-      # Paso C: Copia limpia al VPS
+      - name: Construir proyecto (Exportación Estática)
+        run: npm run build
+
+      # Paso C: Copia limpia de la carpeta OUT al VPS
       - name: Copiar archivos al VPS vía SSH
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "."
+          source: "out/*"
           target: "/home/ubuntu/solutionshub/portafolio-jostin"
           strip_components: 1
           overwrite: true
