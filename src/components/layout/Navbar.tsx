@@ -117,12 +117,12 @@ export function Navbar({ dict, currentLang }: NavbarProps) {
                                 </Link>
                             ))}
                             <a
-                                href={site.cv}
+                                href={site.linkedin}
                                 target="_blank"
                                 rel="noopener"
                                 className="ml-auto text-[12px] text-fg-muted underline underline-offset-4"
                             >
-                                CV
+                                LinkedIn
                             </a>
                         </div>
                     </div>

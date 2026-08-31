@@ -11,7 +11,6 @@ export const site = {
     whatsapp: 'https://wa.me/573015936081',
     linkedin: 'https://www.linkedin.com/in/jostin-castillo/',
     github: 'https://github.com/jostincp',
-    cv: '/cv-jostin-castillo.pdf',
     encore: 'https://encorespace.app',
 } as const;
 
@@ -59,7 +58,6 @@ export const translations = {
             role: 'Ingeniero Full Stack',
             pitch: 'Construyo sistemas que aguantan producción: arquitecturas de microservicios, integraciones con modelos de IA y automatizaciones que le quitan trabajo manual a los equipos.',
             ctaWork: 'Ver casos',
-            ctaCv: 'Descargar CV',
             available: 'Disponible para proyectos',
             stats: [
                 { value: '3+', label: 'Años en el sector tecnológico' },
@@ -191,7 +189,7 @@ export const translations = {
             locationLabel: 'Ubicación',
             location: 'Bogotá, Colombia · disponible en remoto',
             cta: 'Escríbeme',
-            cvCta: 'Descargar CV (PDF)',
+            linkedinCta: 'Ver LinkedIn',
         },
         footer: {
             tagline: 'Ingeniero Full Stack · IA & Automatización',
@@ -213,7 +211,6 @@ export const translations = {
             role: 'Full Stack Engineer',
             pitch: 'I build systems that hold up in production: microservice architectures, AI model integrations, and automation that takes manual work off a team’s plate.',
             ctaWork: 'View work',
-            ctaCv: 'Download CV',
             available: 'Available for projects',
             stats: [
                 { value: '3+', label: 'Years in tech' },
@@ -345,7 +342,7 @@ export const translations = {
             locationLabel: 'Location',
             location: 'Bogotá, Colombia · available remotely',
             cta: 'Get in touch',
-            cvCta: 'Download CV (PDF)',
+            linkedinCta: 'View LinkedIn',
         },
         footer: {
             tagline: 'Full Stack Engineer · AI & Automation',

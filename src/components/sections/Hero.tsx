@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowDownRight, Download } from 'lucide-react';
-import { Dict, site } from '@/i18n/dictionaries';
+import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import { Dict } from '@/i18n/dictionaries';
 import { Magnet } from '@/components/ui/Magnet';
 
 interface HeroProps {
@@ -77,13 +77,11 @@ export function Hero({ dict }: HeroProps) {
                             </a>
                         </Magnet>
                         <a
-                            href={site.cv}
-                            target="_blank"
-                            rel="noopener"
-                            className="inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3.5 text-sm font-medium text-fg hover:border-accent hover:text-accent transition-colors"
+                            href="#contact"
+                            className="group inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3.5 text-sm font-medium text-fg hover:border-accent hover:text-accent transition-colors"
                         >
-                            <Download className="w-4 h-4" />
-                            {dict.hero.ctaCv}
+                            {dict.contact.cta}
+                            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </a>
                     </div>
                 </motion.div>

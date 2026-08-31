@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, MapPin, MessageCircle, Download, ArrowUpRight } from 'lucide-react';
+import { Mail, MapPin, MessageCircle, Linkedin, ArrowUpRight } from 'lucide-react';
 import { Dict, site } from '@/i18n/dictionaries';
 import { FadeIn } from '@/components/ui/FadeIn';
 import { Magnet } from '@/components/ui/Magnet';
@@ -88,13 +88,13 @@ export function Contact({ dict }: { dict: Dict }) {
                         </a>
                     </Magnet>
                     <a
-                        href={site.cv}
+                        href={site.linkedin}
                         target="_blank"
                         rel="noopener"
                         className="inline-flex items-center gap-2 rounded-full border border-line-strong px-7 py-3.5 text-sm font-medium text-fg hover:border-accent hover:text-accent transition-colors"
                     >
-                        <Download className="w-4 h-4" />
-                        {dict.contact.cvCta}
+                        <Linkedin className="w-4 h-4" />
+                        {dict.contact.linkedinCta}
                     </a>
                 </FadeIn>
             </div>

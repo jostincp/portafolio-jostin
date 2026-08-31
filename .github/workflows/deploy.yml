@@ -21,6 +21,17 @@ jobs:
       - name: Construir proyecto (Exportación Estática)
         run: npm run build
 
+      # Paso B2: Retira del servidor archivos que ya no forman parte del sitio.
+      # scp solo sobreescribe, nunca borra, asi que hay que limpiarlos a mano.
+      # Es idempotente: si el archivo ya no existe, no hace nada.
+      - name: Limpiar archivos retirados del sitio
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: rm -f /home/ubuntu/core/www/portafolio-jostin/cv-jostin-castillo.pdf
+
       # Paso C: Copia limpia de la carpeta OUT al VPS
       - name: Copiar archivos al VPS vía SSH
         uses: appleboy/scp-action@v0.1.7
