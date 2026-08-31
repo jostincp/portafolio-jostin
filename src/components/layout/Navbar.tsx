@@ -39,6 +39,16 @@ export function Navbar({ dict, currentLang }: NavbarProps) {
             <nav className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
                 <Link
                     href={`/${currentLang}`}
+                    onClick={(e) => {
+                        // Click normal: subir al inicio y limpiar el ancla de la URL.
+                        // Ctrl/Cmd/Shift+click se dejan pasar para abrir en otra pestana.
+                        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+                        e.preventDefault();
+                        setOpen(false);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        window.history.replaceState(null, '', `/${currentLang}/`);
+                    }}
+                    aria-label="Ir al inicio"
                     className="font-display text-lg font-bold tracking-tight text-fg hover:text-accent transition-colors"
                 >
                     JC<span className="text-accent">.</span>
