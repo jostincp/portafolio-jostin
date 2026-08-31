@@ -1,36 +1,51 @@
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
+import { Dict, site } from '@/i18n/dictionaries';
 
-interface FooterProps {
-    dict: any;
-}
+export function Footer({ dict }: { dict: Dict }) {
+    const year = new Date().getFullYear();
 
-export function Footer({ dict }: FooterProps) {
     return (
-        <footer className="bg-slate-950 py-12 border-t border-slate-800">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-
-                    <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400">
-                        Jostin
+        <footer className="bg-bg border-t border-line px-5 sm:px-8 py-10">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <div className="font-display text-base text-fg mb-1">
+                        {site.name}
+                        <span className="text-accent">.</span>
                     </div>
-
-                    <p className="text-slate-500 text-sm text-center md:text-left">
-                        {dict.footer.copyright}
-                    </p>
-
-                    <div className="flex gap-4">
-                        <a href="#" className="p-2.5 bg-slate-900 rounded-lg border border-slate-800 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-all">
-                            <Github className="w-5 h-5" />
-                        </a>
-                        <a href="#" className="p-2.5 bg-slate-900 rounded-lg border border-slate-800 text-slate-400 hover:text-blue-400 hover:border-blue-500/50 transition-all">
-                            <Linkedin className="w-5 h-5" />
-                        </a>
-                        <a href="#" className="p-2.5 bg-slate-900 rounded-lg border border-slate-800 text-slate-400 hover:text-sky-400 hover:border-sky-500/50 transition-all">
-                            <Twitter className="w-5 h-5" />
-                        </a>
-                    </div>
-
+                    <p className="text-[12px] text-fg-dim">{dict.footer.tagline}</p>
                 </div>
+
+                <div className="flex items-center gap-2">
+                    <a
+                        href={site.github}
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="GitHub"
+                        className="p-2.5 rounded-xl border border-line text-fg-muted hover:text-accent hover:border-line-strong transition-colors"
+                    >
+                        <Github className="w-4 h-4" />
+                    </a>
+                    <a
+                        href={site.linkedin}
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="LinkedIn"
+                        className="p-2.5 rounded-xl border border-line text-fg-muted hover:text-accent hover:border-line-strong transition-colors"
+                    >
+                        <Linkedin className="w-4 h-4" />
+                    </a>
+                    <a
+                        href={`mailto:${site.email}`}
+                        aria-label="Email"
+                        className="p-2.5 rounded-xl border border-line text-fg-muted hover:text-accent hover:border-line-strong transition-colors"
+                    >
+                        <Mail className="w-4 h-4" />
+                    </a>
+                </div>
+
+                <p className="text-[12px] text-fg-dim">
+                    &copy; {year} {site.name}. {dict.footer.rights}
+                </p>
             </div>
         </footer>
     );

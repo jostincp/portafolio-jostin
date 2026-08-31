@@ -1,119 +1,114 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Terminal, Code2, Database, Layout, Sparkles } from 'lucide-react';
-import Link from 'next/link';
-import { Language } from '@/i18n/dictionaries';
+import { ArrowDownRight, Download } from 'lucide-react';
+import { Dict, site } from '@/i18n/dictionaries';
+import { Magnet } from '@/components/ui/Magnet';
 
 interface HeroProps {
-    dict: any;
-    currentLang: Language;
+    dict: Dict;
 }
 
-export function Hero({ dict, currentLang }: HeroProps) {
-    const containerVariants: any = {
+export function Hero({ dict }: HeroProps) {
+    const container = {
         hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-            },
-        },
+        visible: { opacity: 1, transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
     };
-
-    const itemVariants: any = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.5,
-                ease: "easeOut",
-            },
-        },
+    const item = {
+        hidden: { opacity: 0, y: 26 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const } },
     };
 
     return (
-        <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-            {/* Background glowing effects */}
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[128px] pointer-events-none" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[128px] pointer-events-none" />
+        <section
+            id="home"
+            className="relative min-h-[100svh] flex flex-col justify-between overflow-hidden grain pt-24 pb-8"
+        >
+            {/* halos de fondo */}
+            <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-[radial-gradient(circle,rgba(214,255,63,0.07),transparent_62%)]" />
+            <div className="pointer-events-none absolute bottom-0 right-0 w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(120,140,255,0.06),transparent_65%)]" />
 
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+                variants={container}
+                initial="hidden"
+                animate="visible"
+                className="relative z-10 flex-1 flex flex-col justify-center max-w-7xl mx-auto w-full px-5 sm:px-8"
+            >
+                <motion.div variants={item} className="flex items-center gap-3 mb-8">
+                    <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-70 animate-ping" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                    </span>
+                    <span className="eyebrow text-fg-muted">{dict.hero.available}</span>
+                </motion.div>
 
-                    <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate="visible"
-                        className="max-w-2xl"
-                    >
-                        <motion.div variants={itemVariants} className="flex items-center gap-2 mb-4 text-emerald-400 font-medium tracking-wider uppercase text-sm">
-                            <Sparkles className="w-4 h-4" />
-                            {dict.hero.greeting}
-                        </motion.div>
+                <motion.h1
+                    variants={item}
+                    className="display-heading text-[15vw] sm:text-[13vw] lg:text-[11.5vw] xl:text-[10.5vw]"
+                >
+                    Jostin
+                    <br />
+                    Castillo
+                </motion.h1>
 
-                        <motion.h1 variants={itemVariants} className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-                            <span className="block text-slate-50">Jostin</span>
-                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
-                                Full Stack Developer
-                            </span>
-                        </motion.h1>
+                <motion.div
+                    variants={item}
+                    className="mt-8 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 border-t border-line pt-8"
+                >
+                    <div className="max-w-xl">
+                        <p className="font-display text-xl sm:text-2xl text-fg mb-4">
+                            {dict.hero.role}
+                            <span className="text-accent"> / </span>
+                            <span className="text-fg-muted">AI &amp; Automation</span>
+                        </p>
+                        <p className="text-[15px] sm:text-base leading-relaxed text-fg-muted">
+                            {dict.hero.pitch}
+                        </p>
+                    </div>
 
-                        <motion.p variants={itemVariants} className="text-xl text-slate-400 mb-8 max-w-xl leading-relaxed">
-                            {dict.hero.description}
-                        </motion.p>
-
-                        <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
-                            <Link
-                                href={`/${currentLang}#projects`}
-                                className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold text-slate-900 bg-emerald-400 rounded-lg hover:bg-emerald-300 transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(52,211,153,0.3)]"
+                    <div className="flex flex-wrap items-center gap-3">
+                        <Magnet padding={70} strength={7}>
+                            <a
+                                href="#work"
+                                className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-[#0A0A0B] hover:bg-fg transition-colors"
                             >
-                                {dict.hero.viewProjects}
-                            </Link>
-                            <Link
-                                href={`/${currentLang}#contact`}
-                                className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-lg hover:bg-emerald-400/20 transition-all hover:scale-105 active:scale-95"
-                            >
-                                {dict.hero.contact}
-                            </Link>
-                        </motion.div>
-                    </motion.div>
+                                {dict.hero.ctaWork}
+                                <ArrowDownRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+                            </a>
+                        </Magnet>
+                        <a
+                            href={site.cv}
+                            target="_blank"
+                            rel="noopener"
+                            className="inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3.5 text-sm font-medium text-fg hover:border-accent hover:text-accent transition-colors"
+                        >
+                            <Download className="w-4 h-4" />
+                            {dict.hero.ctaCv}
+                        </a>
+                    </div>
+                </motion.div>
+            </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative hidden lg:block"
-                    >
-                        <div className="relative w-full aspect-square max-w-md mx-auto">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 rounded-3xl rotate-6 blur-md" />
-                            <div className="absolute inset-0 bg-slate-800 rounded-3xl border border-slate-700 shadow-2xl flex items-center justify-center overflow-hidden">
-                                <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-400 via-transparent to-transparent" />
-
-                                {/* Floating Tech Icons */}
-                                <motion.div animate={{ y: [0, -20, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="absolute top-12 left-12 p-4 bg-slate-900/50 rounded-2xl border border-slate-700/50 backdrop-blur-md">
-                                    <Terminal className="w-8 h-8 text-emerald-400" />
-                                </motion.div>
-
-                                <motion.div animate={{ y: [0, 20, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="absolute bottom-12 right-12 p-4 bg-slate-900/50 rounded-2xl border border-slate-700/50 backdrop-blur-md">
-                                    <Database className="w-8 h-8 text-cyan-400" />
-                                </motion.div>
-
-                                <motion.div animate={{ x: [0, -15, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="absolute top-24 right-16 p-4 bg-slate-900/50 rounded-2xl border border-slate-700/50 backdrop-blur-md">
-                                    <Layout className="w-8 h-8 text-blue-400" />
-                                </motion.div>
-
-                                <div className="text-center z-10">
-                                    <Code2 className="w-24 h-24 text-emerald-500 mx-auto mb-6 opacity-80" />
-                                    <div className="text-2xl font-bold text-slate-200">&lt;Code /&gt;</div>
-                                </div>
+            {/* franja de métricas */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.55, duration: 0.8 }}
+                className="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 mt-12"
+            >
+                <div className="grid grid-cols-3 border-t border-line">
+                    {dict.hero.stats.map((s) => (
+                        <div key={s.label} className="py-5 pr-4 border-r border-line last:border-r-0">
+                            <div className="font-display text-3xl sm:text-4xl md:text-5xl text-fg leading-none mb-2">
+                                {s.value}
+                            </div>
+                            <div className="text-[11px] sm:text-xs text-fg-dim leading-snug max-w-[16ch]">
+                                {s.label}
                             </div>
                         </div>
-                    </motion.div>
-
+                    ))}
                 </div>
-            </div>
+            </motion.div>
         </section>
     );
 }

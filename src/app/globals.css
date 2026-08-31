@@ -1,43 +1,157 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Sistema visual — Jostin Castillo
+   Near-black editorial + acento lima eléctrico + display gigante
+   ============================================================ */
+
 :root {
-  --background: #0f172a; /* Slate 900 base */
-  --foreground: #f8fafc; /* Slate 50 text */
-  --primary: #10b981;    /* Emerald 500 */
-  --primary-hover: #059669; /* Emerald 600 */
-  --secondary: #0891b2;  /* Cyan 600 */
-  --accent: #38bdf8;     /* Light Sky Blue for glowing effects */
-  --card: #1e293b;       /* Slate 800 */
-  --card-foreground: #f1f5f9;
-  --border: #334155;     /* Slate 700 */
-  --muted: #475569;      /* Slate 600 */
-  --muted-foreground: #94a3b8; /* Slate 400 */
+  --bg: #0A0A0B;
+  --bg-elev: #111113;
+  --surface: #17171A;
+  --line: rgba(232, 236, 240, 0.10);
+  --line-strong: rgba(232, 236, 240, 0.22);
+  --fg: #E8ECF0;
+  --fg-muted: #8E969F;
+  --fg-dim: #5C636B;
+  --accent: #D6FF3F;
+  --accent-dim: #A8CC2E;
+  --light-bg: #F2F2EF;
+  --light-fg: #0A0A0B;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
-  --color-secondary: var(--secondary);
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-dim: var(--fg-dim);
   --color-accent: var(--accent);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-border: var(--border);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --color-accent-dim: var(--accent-dim);
+  --color-light-bg: var(--light-bg);
+  --color-light-fg: var(--light-fg);
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans);
+  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
+
+/* Titular display con degradado plateado */
+.display-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  background: linear-gradient(175deg, #FFFFFF 0%, #C4CCD4 42%, #6E767F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.display-heading-dark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  color: var(--light-fg);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Etiqueta pequeña de sección */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Grano sutil sobre el fondo oscuro */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Marquee horizontal infinito */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee-left 62s linear infinite;
+}
+
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+
+/* Pulso que recorre las conexiones de los diagramas de arquitectura */
+@keyframes beam-flow {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -100; }
+}
+
+.beam {
+  stroke-dasharray: 14 86;
+  animation: beam-flow 2.9s linear infinite;
+  filter: drop-shadow(0 0 3px currentColor);
+  opacity: 0.95;
+}
+
+/* Guard de movimiento reducido — desactivado a propósito: el sitio anima para todos.
+   Para volver a respetar la preferencia del sistema, descomenta este bloque.
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+  .beam { animation: none; stroke-dasharray: none; opacity: 0.4; filter: none; }
+  html { scroll-behavior: auto; }
+}
+*/
+
+::selection {
+  background: var(--accent);
+  color: #0A0A0B;
+}
+
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #2A2A2E; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #3A3A40; }
